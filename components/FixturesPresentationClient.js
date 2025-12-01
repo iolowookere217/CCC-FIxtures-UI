@@ -313,6 +313,19 @@ const FixturesPresentation = () => {
   const [selectedTimes, setSelectedTimes] = useState([]);
   const [selectedVenues, setSelectedVenues] = useState([]);
   const [selectedDays, setSelectedDays] = useState([]);
+  const [selectedTeam, setSelectedTeam] = useState("");
+
+  // compute unique teams from current slide fixtures (exclude RESERVE)
+  const uniqueTeams = Array.from(
+    new Set(
+      baseFixtures.flatMap((f) =>
+        (f.match || "")
+          .split(/VS/i)
+          .map((s) => s.trim())
+          .filter(Boolean)
+      )
+    )
+  );
 
   const toggle = (list, setList, value) => {
     if (list.includes(value)) setList(list.filter((v) => v !== value));
@@ -334,6 +347,13 @@ const FixturesPresentation = () => {
       !selectedDays.includes((f.day || "").toUpperCase())
     )
       return false;
+    if (selectedTeam && selectedTeam !== "ALL") {
+      const teams = (f.match || "")
+        .toUpperCase()
+        .split("VS")
+        .map((s) => s.trim());
+      if (!teams.includes(selectedTeam.toUpperCase())) return false;
+    }
     return true;
   });
 
@@ -368,7 +388,8 @@ const FixturesPresentation = () => {
               <div className="flex items-center gap-2 flex-wrap">
                 {selectedTimes.length > 0 ||
                 selectedVenues.length > 0 ||
-                selectedDays.length > 0 ? (
+                selectedDays.length > 0 ||
+                selectedTeam ? (
                   <div className="px-3 py-1 rounded-md font-semibold text-sm bg-white/20 text-white">
                     Filtered: {totalGames} {totalGames === 1 ? "game" : "games"}
                   </div>
@@ -498,6 +519,24 @@ const FixturesPresentation = () => {
                   <span className="ml-1">SUN</span>
                 </label>
               </div>
+
+              <div className="flex items-center gap-2">
+                <label className="text-sm text-white">Team</label>
+                <select
+                  className="text-sm bg-white/90 text-gray-900 rounded px-2 py-1 border border-white/20 focus:outline-none focus:ring-2 focus:ring-yellow-300"
+                  value={selectedTeam}
+                  onChange={(e) => setSelectedTeam(e.target.value)}>
+                  <option value="">All Teams</option>
+                  {uniqueTeams.map((t) => (
+                    <option
+                      key={t}
+                      value={t}
+                      className="bg-white text-gray-900">
+                      {t}
+                    </option>
+                  ))}
+                </select>
+              </div>
             </div>
 
             <div className="flex items-center gap-2">
@@ -506,6 +545,7 @@ const FixturesPresentation = () => {
                   setSelectedTimes([]);
                   setSelectedVenues([]);
                   setSelectedDays([]);
+                  setSelectedTeam("");
                 }}
                 className="text-sm px-3 py-1 rounded bg-white/20 text-white">
                 Clear
@@ -515,6 +555,7 @@ const FixturesPresentation = () => {
                   setSelectedTimes([]);
                   setSelectedVenues([]);
                   setSelectedDays([]);
+                  setSelectedTeam("");
                 }}
                 className={`text-sm px-3 py-1 rounded ${
                   selectedTimes.length === 0 &&
