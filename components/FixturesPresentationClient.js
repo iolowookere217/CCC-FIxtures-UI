@@ -260,8 +260,6 @@ const FixturesPresentation = () => {
         venue: "TBS",
         match: "FGC VS MRI",
       },
-    ],
-    march: [
       {
         date: "22/02/2026",
         day: "SUN",
