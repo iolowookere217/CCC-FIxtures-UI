@@ -160,7 +160,7 @@ const Homepage = () => {
             The Club Cricket Committee (CCC), founded in 1987, is one of
             Nigeria’s most influential cricket bodies. Starting with four clubs,
             it has grown into a major cricket ecosystem with two divisions: 9
-            teams in the Premier League and 14 in Division One for the 2024/25
+            teams in the Premier League and 14 in Division One for the 2025/26
             season. Over its 38-year history, the CCC has developed talent
             across Nigeria, attracting players from multiple states and
             neighboring countries. Originally a 50-over league, it now operates

@@ -1,5 +1,4 @@
 {
-  "/not-found": "app/not-found.js",
   "/page": "app/page.js",
   "/division-one/page": "app/division-one/page.js",
   "/premier-league/page": "app/premier-league/page.js"
