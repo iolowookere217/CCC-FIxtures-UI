@@ -1,5 +1,5 @@
-import FixturesPresentationClient from "../components/FixturesPresentationClient";
+import Homepage from "../components/home";
 
 export default function Page() {
-  return <FixturesPresentationClient />;
+  return <Homepage />;
 }
