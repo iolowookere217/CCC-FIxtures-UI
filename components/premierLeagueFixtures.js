@@ -376,7 +376,7 @@ const PremierLeagueFixtures = () => {
                   {currentSlideData.title}
                 </h1>
                 <div className="text-sm text-yellow-200">
-                  CLUB CRICKET COMMITTEE • PREMIER LEAGUE FIXTURES
+                  • PREMIER LEAGUE FIXTURES
                 </div>
               </div>
             </div>
