@@ -364,14 +364,14 @@ const FixturesPresentation = () => {
     <div className="w-full min-h-screen bg-gray-50 p-6">
       <div className="mx-auto w-full max-w-7xl">
         <div
-          className={`w-full bg-gradient-to-br ${currentSlideData.color} rounded-lg p-6`}>
+          className={`w-full bg-gradient-to-br ${currentSlideData.color} rounded-lg p-4`}>
           {/* Top bar with title, nav and summary */}
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-4">
-            <div className="flex items-center gap-4 w-full md:w-auto">
+            <div className="flex items-start gap-4 w-full md:w-auto">
               <img
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 120'%3E%3Crect x='45' y='20' width='10' height='80' fill='white'/%3E%3Ccircle cx='50' cy='15' r='8' fill='%23ff6b35'/%3E%3C/svg%3E"
-                alt="Cricket"
-                className="h-10 w-10"
+                src="/ccc_logo.png"
+                alt="brands"
+                className="sm:w-[10rem] sm:h-[5rem] w-[4rem] h-[3rem]"
               />
               <div>
                 <h1 className="text-2xl md:text-3xl font-bold text-white tracking-wide">
