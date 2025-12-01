@@ -157,10 +157,19 @@ const Homepage = () => {
           </h2>
           <div className="w-24 h-1 bg-yellow-400 mx-auto mb-6"></div>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            The Club Cricket Committee (CCC) is the premier cricket organization
-            in Lagos, Nigeria. Since 1904, we have been nurturing cricket talent
-            and organizing competitive leagues that showcase the best of
-            Nigerian cricket.
+            The Club Cricket Committee (CCC), founded in 1987, is one of
+            Nigeria’s most influential cricket bodies. Starting with four clubs,
+            it has grown into a major cricket ecosystem with two divisions: 9
+            teams in the Premier League and 14 in Division One for the 2024/25
+            season. Over its 38-year history, the CCC has developed talent
+            across Nigeria, attracting players from multiple states and
+            neighboring countries. Originally a 50-over league, it now operates
+            in the modern T20 format, increasing excitement and aligning with
+            global standards. With over 150 matches played yearly, the CCC plays
+            a key role in identifying and developing players for the national
+            team. Its strong grassroots and elite programs have contributed to
+            Nigeria’s recent achievements, including two ICC U-19 World Cup
+            appearances.
           </p>
         </div>
 
@@ -188,7 +197,16 @@ const Homepage = () => {
               </li>
               <li className="flex items-start gap-3">
                 <div className="w-2 h-2 bg-yellow-400 rounded-full mt-2"></div>
-                <span>Super 6 Fixtures begin March 14, 2026</span>
+                <span>
+                  Premier League Super 6 Fixtures begin March 14, 2026
+                </span>
+              </li>
+              <li className="flex items-start gap-3">
+                <div className="w-2 h-2 bg-yellow-400 rounded-full mt-2"></div>
+                <span>
+                  {" "}
+                  Division one Super 4 Fixtures begin February 14, 2026
+                </span>
               </li>
             </ul>
           </div>

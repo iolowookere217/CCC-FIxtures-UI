@@ -746,7 +746,7 @@ const DivisionOneFixtures = () => {
             />
           </div>
           <div className="mt-4 text-sm text-white/90">
-            Season 2025/2026 • Super 6 Fixtures Begin 14th March 2026
+            Season 2025/2026 • Super 4 to begin 14th February 2026
           </div>
         </div>
 
