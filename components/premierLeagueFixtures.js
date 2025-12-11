@@ -121,7 +121,7 @@ const PremierLeagueFixtures = () => {
         day: "SUN",
         time: "10am",
         venue: "TBS",
-        match: "ITCC vs MRI",
+        match: "ILCC vs ITCC",
       },
       {
         date: "04/01/2026",
@@ -163,7 +163,7 @@ const PremierLeagueFixtures = () => {
         day: "SUN",
         time: "10am",
         venue: "TBS",
-        match: "ILCC vs ITCC",
+        match: "ITCC vs MRI",
       },
       {
         date: "18/01/2026",

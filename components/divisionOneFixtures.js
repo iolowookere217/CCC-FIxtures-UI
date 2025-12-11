@@ -132,8 +132,8 @@ const DivisionOneFixtures = () => {
       {
         date: "13/12/2025",
         day: "Sat",
-        time: "10am",
-        venue: "UNILAG",
+        time: "2pm",
+        venue: "TBS",
         match: "IMCC vs HPCC",
         group: "B",
       },
