@@ -1,9 +1,11 @@
 "use client";
 import React, { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const PremierLeagueFixtures = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const router = useRouter();
 
   const fixtures = {
     december: [
@@ -573,12 +575,21 @@ const PremierLeagueFixtures = () => {
               {displayedFixtures.map((fixture, index) => (
                 <div
                   key={index}
-                  className={`border rounded-md p-3 transition hover:shadow-md ${
+                  onClick={() => {
+                    const params = new URLSearchParams({
+                      match: fixture.match,
+                      date: fixture.date,
+                      venue: fixture.venue,
+                      division: "Premier League",
+                    });
+                    router.push(`/results?${params.toString()}`);
+                  }}
+                  className={`border rounded-md p-3 transition hover:shadow-md cursor-pointer ${
                     fixture.venue === "UNILAG"
-                      ? "bg-yellow-50 border-yellow-200"
+                      ? "bg-yellow-50 border-yellow-200 hover:bg-yellow-100"
                       : fixture.venue === "TBS"
-                      ? "bg-blue-50 border-blue-200"
-                      : "bg-white"
+                      ? "bg-blue-50 border-blue-200 hover:bg-blue-100"
+                      : "bg-white hover:bg-gray-50"
                   }`}>
                   <div className="flex items-center justify-between mb-2">
                     <div className="text-xs font-semibold text-gray-600">
