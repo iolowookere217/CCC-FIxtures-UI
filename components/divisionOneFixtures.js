@@ -756,7 +756,7 @@ const DivisionOneFixtures = () => {
               className="w-full object-fill opacity-95"
             />
           </div>
-          <div className="mt-4 text-sm text-white/90">
+          <div className="mt-4 text-sm text-white/85">
             Season 2025/2026 • Super 4 to begin 14th February 2026
           </div>
         </div>
