@@ -54,7 +54,7 @@ const DivisionOneFixtures = () => {
         day: "Sun",
         time: "2pm",
         venue: "CMS",
-        match: "TCC vs HPCC",
+        match: "TBCC vs HPCC",
         group: "B",
       },
       {
@@ -120,7 +120,7 @@ const DivisionOneFixtures = () => {
         day: "Sun",
         time: "10am",
         venue: "CMS",
-        match: "TCC vs LACC",
+        match: "TBCC vs LACC",
         group: "B",
       },
       {
@@ -210,7 +210,7 @@ const DivisionOneFixtures = () => {
         day: "Sun",
         time: "10am",
         venue: "UNILAG",
-        match: "IMCC vs TCC",
+        match: "IMCC vs TBCC",
         group: "B",
       },
       {
@@ -234,7 +234,7 @@ const DivisionOneFixtures = () => {
         day: "Sun",
         time: "10am",
         venue: "UNILAG",
-        match: "LCCC vs TCC",
+        match: "LCCC vs TBCC",
         group: "B",
       },
       {
@@ -290,7 +290,7 @@ const DivisionOneFixtures = () => {
         day: "Sun",
         time: "2pm",
         venue: "UNILAG",
-        match: "TACC vs TCC",
+        match: "TACC vs TBCC",
         group: "B",
       },
       {
@@ -332,7 +332,7 @@ const DivisionOneFixtures = () => {
         day: "Sun",
         time: "10am",
         venue: "UNILAG",
-        match: "TCC vs SECC2",
+        match: "TBCC vs SECC2",
         group: "B",
       },
       {
