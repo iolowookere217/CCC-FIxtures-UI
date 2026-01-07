@@ -22,3 +22,5 @@ Deploying to Vercel:
 
 - Connect this repository to Vercel or deploy directly from the Vercel dashboard. Vercel automatically detects Next.js projects.
 - Ensure the build command is `npm run build` and the output directory is left empty (Vercel will use default settings for Next.js).
+
+edited the readme!
