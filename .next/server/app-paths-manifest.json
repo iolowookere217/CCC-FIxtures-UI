@@ -1,7 +1,4 @@
 {
-  "/premier-league/page": "app/premier-league/page.js",
-  "/results/page": "app/results/page.js",
-  "/weekly-reports/premier-league/page": "app/weekly-reports/premier-league/page.js",
-  "/weekly-reports/division-one/page": "app/weekly-reports/division-one/page.js",
+  "/page": "app/page.js",
   "/division-one/page": "app/division-one/page.js"
 }
