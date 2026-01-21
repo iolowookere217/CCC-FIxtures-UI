@@ -1304,6 +1304,9 @@ video {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity, 1));
 }
+.text-white\/85 {
+  color: rgb(255 255 255 / 0.85);
+}
 .text-white\/90 {
   color: rgb(255 255 255 / 0.9);
 }
@@ -1318,9 +1321,6 @@ video {
 .text-yellow-800 {
   --tw-text-opacity: 1;
   color: rgb(133 77 14 / var(--tw-text-opacity, 1));
-}
-.text-white\/85 {
-  color: rgb(255 255 255 / 0.85);
 }
 .opacity-0 {
   opacity: 0;

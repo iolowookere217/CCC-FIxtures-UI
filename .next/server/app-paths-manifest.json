@@ -1,4 +1,4 @@
 {
-  "/page": "app/page.js",
+  "/premier-league/page": "app/premier-league/page.js",
   "/division-one/page": "app/division-one/page.js"
 }

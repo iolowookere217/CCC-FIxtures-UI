@@ -11,6 +11,11 @@
       "static/css/app/layout.css",
       "static/chunks/app/layout.js"
     ],
+    "/premier-league/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/premier-league/page.js"
+    ],
     "/division-one/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
