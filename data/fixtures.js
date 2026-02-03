@@ -311,7 +311,7 @@ export const premierLeagueFixtures = {
       id: "PL-FEB-008",
       date: "08/02/2026",
       day: "SUN",
-      time: "10am",
+      time: "2pm",
       venue: "UNILAG",
       match: "RCC vs MRI",
       result: null,
