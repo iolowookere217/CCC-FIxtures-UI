@@ -2,46 +2,30 @@
 import React from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
+import { getFixtureById } from "../data/fixtures";
 
 const ResultsView = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
 
+  const matchId = searchParams.get("id") || "";
   const match = searchParams.get("match") || "TBD vs TBD";
   const date = searchParams.get("date") || "";
   const venue = searchParams.get("venue") || "";
   const division = searchParams.get("division") || "";
+
+  // Get fixture data from centralized data
+  const fixture = matchId ? getFixtureById(matchId) : null;
+  const result = fixture?.result || null;
 
   // Parse match to get teams
   const teams = match.split(" vs ").map((t) => t.trim());
   const team1 = teams[0] || "Team 1";
   const team2 = teams[1] || "Team 2";
 
-  // Mock result data - in production, this would come from a database
-  const result = {
-    winner: team1,
-    winMargin: "33 Runs",
-    team1Score: "159/9",
-    team2Score: "126/6",
-    topScorer: {
-      name: "Solomon Chilemanya",
-      runs: 58,
-      balls: 34,
-    },
-    wicketTaker: {
-      name: "Afeez Obisesan",
-      wickets: 3,
-      runs: 14,
-    },
-    playerOfTheMatch: {
-      name: "Solomon Chilemanya",
-      team: team1,
-      performance: "Match-winning innings of 58 runs",
-    },
-  };
-
   // Determine winner/loser for score colors
-  const team1IsWinner = result.winner === team1;
+  const hasScores = result?.team1Score && result?.team2Score;
+  const team1IsWinner = result?.winner === team1;
 
   return (
     <div className="w-full min-h-screen bg-gradient-to-br from-green-50 via-yellow-50 to-orange-50 p-6">
@@ -65,23 +49,31 @@ const ResultsView = () => {
                   {division} • {date} • {venue}
                 </p>
               </div>
+              {matchId && (
+                <div className="text-xs text-green-200 bg-green-800/30 px-2 py-1 rounded">
+                  {matchId}
+                </div>
+              )}
             </div>
           </div>
 
           {/* Match Details */}
           <div className="p-8">
+            {/* Match Info Card */}
             <div className="bg-yellow-50 border-2 border-yellow-200 rounded-xl p-6 mb-6">
-              <h2 className="text-xl font-bold text-gray-800 mb-3">
-                Match 3: {match}
-              </h2>
+              <h2 className="text-xl font-bold text-gray-800 mb-3">{match}</h2>
               <div className="flex items-center justify-center gap-4">
                 <div className="text-center">
                   <p className="text-gray-600 font-semibold">{team1}</p>
                   <p
                     className={`text-2xl font-bold ${
-                      team1IsWinner ? "text-green-600" : "text-red-600"
+                      hasScores
+                        ? team1IsWinner
+                          ? "text-green-600"
+                          : "text-red-600"
+                        : "text-gray-800"
                     }`}>
-                    {result.team1Score}
+                    {result?.team1Score || "--"}
                   </p>
                 </div>
                 <div className="text-gray-400 text-2xl font-bold">vs</div>
@@ -89,9 +81,13 @@ const ResultsView = () => {
                   <p className="text-gray-600 font-semibold">{team2}</p>
                   <p
                     className={`text-2xl font-bold ${
-                      team1IsWinner ? "text-red-600" : "text-green-600"
+                      hasScores
+                        ? team1IsWinner
+                          ? "text-red-600"
+                          : "text-green-600"
+                        : "text-gray-800"
                     }`}>
-                    {result.team2Score}
+                    {result?.team2Score || "--"}
                   </p>
                 </div>
               </div>
@@ -99,12 +95,19 @@ const ResultsView = () => {
 
             {/* Winner Banner */}
             <div className="bg-gradient-to-r from-green-500 to-green-600 text-white rounded-xl p-6 mb-8 text-center shadow-lg">
-              <h2 className="text-3xl font-bold mb-2">{result.winner}</h2>
-              <p className="text-xl">Wins by {result.winMargin}</p>
-              <p className="text-green-100 text-sm mt-2">
-                Defended their total of {result.team1Score}, restricting {team2}{" "}
-                to {result.team2Score}.
+              <h2 className="text-3xl font-bold mb-2">
+                {result?.winner || "--"}
+              </h2>
+              <p className="text-xl">
+                {result?.winMargin ? `Wins by ${result.winMargin}` : "--"}
               </p>
+              {hasScores && result?.winner && (
+                <p className="text-green-100 text-sm mt-2">
+                  {team1IsWinner
+                    ? `Defended their total of ${result.team1Score}, restricting ${team2} to ${result.team2Score}.`
+                    : `Chased down ${team1}'s total of ${result.team1Score}, finishing at ${result.team2Score}.`}
+                </p>
+              )}
             </div>
 
             {/* Player of the Match */}
@@ -116,17 +119,17 @@ const ResultsView = () => {
                     Player of the Match
                   </h3>
                   <p className="text-3xl font-bold text-purple-700 mt-2">
-                    {result.playerOfTheMatch.name}
+                    {result?.playerOfTheMatch?.name || "--"}
                   </p>
                   <p className="text-sm text-gray-600 mt-1">
-                    {result.playerOfTheMatch.team}
+                    {result?.playerOfTheMatch?.team || "--"}
                   </p>
                 </div>
                 <div className="text-4xl">🏆</div>
               </div>
               <div className="bg-white rounded-lg p-4">
                 <p className="text-gray-700 font-semibold text-center">
-                  {result.playerOfTheMatch.performance}
+                  {result?.playerOfTheMatch?.performance || "--"}
                 </p>
               </div>
             </div>
@@ -141,7 +144,7 @@ const ResultsView = () => {
                       Top Scorer
                     </h3>
                     <p className="text-2xl font-bold text-blue-700">
-                      {result.topScorer.name}
+                      {result?.topScorer?.name || "--"}
                     </p>
                   </div>
                   <div className="text-4xl">🏏</div>
@@ -151,10 +154,14 @@ const ResultsView = () => {
                     Anchored the innings
                   </p>
                   <p className="text-3xl font-bold text-blue-600">
-                    {result.topScorer.runs} runs
+                    {result?.topScorer?.runs !== undefined
+                      ? `${result.topScorer.runs} runs`
+                      : "--"}
                   </p>
                   <p className="text-gray-600 text-sm">
-                    from {result.topScorer.balls} balls
+                    {result?.topScorer?.balls !== undefined
+                      ? `from ${result.topScorer.balls} balls`
+                      : "--"}
                   </p>
                 </div>
               </div>
@@ -167,7 +174,7 @@ const ResultsView = () => {
                       Wicket Taker
                     </h3>
                     <p className="text-2xl font-bold text-orange-700">
-                      {result.wicketTaker.name}
+                      {result?.wicketTaker?.name || "--"}
                     </p>
                   </div>
                   <div className="text-4xl">🎯</div>
@@ -177,10 +184,14 @@ const ResultsView = () => {
                     Dismantled the opposition
                   </p>
                   <p className="text-3xl font-bold text-orange-600">
-                    {result.wicketTaker.wickets} wickets
+                    {result?.wicketTaker?.wickets !== undefined
+                      ? `${result.wicketTaker.wickets} wickets`
+                      : "--"}
                   </p>
                   <p className="text-gray-600 text-sm">
-                    for only {result.wicketTaker.runs} runs
+                    {result?.wicketTaker?.runs !== undefined
+                      ? `for only ${result.wicketTaker.runs} runs`
+                      : "--"}
                   </p>
                 </div>
               </div>

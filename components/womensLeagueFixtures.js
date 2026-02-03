@@ -1,69 +1,35 @@
 "use client";
 import React, { useState } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { premierLeagueFixtures } from "../data/fixtures";
+import { womensLeagueFixtures } from "../data/fixtures";
 
-const PremierLeagueFixtures = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
+const WomensLeagueFixtures = () => {
   const router = useRouter();
 
-  const fixtures = premierLeagueFixtures;
+  const fixtures = womensLeagueFixtures;
 
-  const getVenueSummary = (fixturesList) => {
-    const venueCounts = {};
-    fixturesList.forEach((fixture) => {
-      const venue = (fixture.venue || "").toUpperCase();
-      venueCounts[venue] = (venueCounts[venue] || 0) + 1;
-    });
-    return venueCounts;
-  };
-
-  const slides = [
-    {
-      title: "DECEMBER 2025",
-      color: "from-blue-900 to-blue-700",
-      fixtures: fixtures.december,
-    },
-    {
-      title: "JANUARY 2026",
-      color: "from-purple-900 to-purple-700",
-      fixtures: fixtures.january,
-    },
-    {
-      title: "FEBRUARY 2026",
-      color: "from-red-900 to-red-700",
-      fixtures: fixtures.february,
-    },
+  const allFixtures = [
+    ...fixtures.round1,
+    ...fixtures.round2,
+    ...fixtures.round3,
   ];
 
-  const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % slides.length);
-  const prevslide = () =>
-    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
-
-  const currentSlideData = slides[currentSlide];
-  // remove RESERVE entries first
-  const baseFixtures = currentSlideData.fixtures.filter(
-    (f) => (f.match || "").toUpperCase() !== "RESERVE"
-  );
-
-  // filter state (arrays for simplicity)
+  // Filter state
   const [selectedTimes, setSelectedTimes] = useState([]);
-  const [selectedVenues, setSelectedVenues] = useState([]);
-  const [selectedDays, setSelectedDays] = useState([]);
+  const [selectedRounds, setSelectedRounds] = useState([]);
   const [selectedTeam, setSelectedTeam] = useState("");
 
-  // compute unique teams from current slide fixtures (exclude RESERVE)
+  // Compute unique teams
   const uniqueTeams = Array.from(
     new Set(
-      baseFixtures.flatMap((f) =>
+      allFixtures.flatMap((f) =>
         (f.match || "")
           .split(/vs/i)
           .map((s) => s.trim())
           .filter(Boolean)
       )
     )
-  );
+  ).sort();
 
   const toggle = (list, setList, value) => {
     if (list.includes(value)) setList(list.filter((v) => v !== value));
@@ -72,18 +38,10 @@ const PremierLeagueFixtures = () => {
 
   const normTime = (t) => (t || "").toLowerCase().replace(/\s+/g, "");
 
-  const displayedFixtures = baseFixtures.filter((f) => {
+  const displayedFixtures = allFixtures.filter((f) => {
     if (selectedTimes.length > 0 && !selectedTimes.includes(normTime(f.time)))
       return false;
-    if (
-      selectedVenues.length > 0 &&
-      !selectedVenues.includes((f.venue || "").toUpperCase())
-    )
-      return false;
-    if (
-      selectedDays.length > 0 &&
-      !selectedDays.includes((f.day || "").toUpperCase())
-    )
+    if (selectedRounds.length > 0 && !selectedRounds.includes(f.round))
       return false;
     if (selectedTeam && selectedTeam !== "ALL") {
       const teams = (f.match || "")
@@ -95,87 +53,53 @@ const PremierLeagueFixtures = () => {
     return true;
   });
 
-  const venueSummary = getVenueSummary(baseFixtures);
   const totalGames = displayedFixtures.length;
+  const hasFilters =
+    selectedTimes.length > 0 || selectedRounds.length > 0 || selectedTeam;
 
   return (
     <div className="w-full min-h-screen bg-gray-50 p-6">
       <div className="mx-auto w-full max-w-7xl">
-        <div
-          className={`w-full bg-gradient-to-br ${currentSlideData.color} rounded-lg p-4`}>
-          {/* Top bar with title, nav and summary */}
+        <div className="w-full bg-gradient-to-br from-pink-600 to-pink-900 rounded-lg p-4">
+          {/* Header */}
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-4">
             <div className="flex items-start gap-4 w-full md:w-auto">
-              {/* <img
-                src="/ccc_logo.png"
-                alt="brands"
-                className="sm:w-[10rem] sm:h-[5rem] w-[4rem] h-[3rem]"
-              /> */}
               <div>
                 <h1 className="text-2xl md:text-3xl font-bold text-white tracking-wide">
-                  {currentSlideData.title}
+                  FEBRUARY 2026
                 </h1>
                 <div className="text-sm text-yellow-200">
-                  • PREMIER LEAGUE FIXTURES
+                  • WOMEN&apos;S LEAGUE FIXTURES
                 </div>
               </div>
             </div>
 
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 w-full sm:w-auto">
-              {/* Summary: show per-venue chips when no filters; otherwise show filtered total only */}
               <div className="flex items-center gap-2 flex-wrap">
-                {selectedTimes.length > 0 ||
-                selectedVenues.length > 0 ||
-                selectedDays.length > 0 ||
-                selectedTeam ? (
+                {hasFilters ? (
                   <div className="px-3 py-1 rounded-md font-semibold text-sm bg-white/20 text-white">
                     Filtered: {totalGames} {totalGames === 1 ? "game" : "games"}
                   </div>
                 ) : (
                   <>
-                    {Object.entries(venueSummary).map(([venue, count]) => (
-                      <div
-                        key={venue}
-                        className={`px-3 py-1 rounded-md font-semibold text-sm ${
-                          venue === "UNILAG"
-                            ? "bg-yellow-100 text-yellow-800 border border-yellow-200"
-                            : venue === "TBS"
-                            ? "bg-blue-100 text-blue-800 border border-blue-200"
-                            : "bg-white text-gray-800"
-                        }`}>
-                        {venue}: {count}
-                      </div>
-                    ))}
+                    <div className="px-3 py-1 rounded-md font-semibold text-sm bg-yellow-100 text-yellow-800 border border-yellow-200">
+                      UNILAG: {allFixtures.length}
+                    </div>
                     <div className="px-3 py-1 rounded-md font-semibold text-sm bg-white/20 text-white">
-                      Total: {baseFixtures.length}
+                      Total: {allFixtures.length}
                     </div>
                   </>
                 )}
               </div>
+            </div>
+          </div>
 
-              {/* Navigation moved to top bar to avoid scroll overlap */}
-              <div className="flex items-center gap-2 mt-2 sm:mt-0">
-                <button
-                  onClick={prevslide}
-                  disabled={currentSlide === 0}
-                  className={`flex items-center justify-center w-10 h-10 rounded-full shadow-lg transition-colors focus:outline-none ${
-                    currentSlide === 0
-                      ? "bg-gray-300 text-gray-600 cursor-not-allowed"
-                      : "bg-yellow-400 text-gray-900 hover:scale-105"
-                  }`}>
-                  <ChevronLeft className="w-5 h-5" />
-                </button>
-                <button
-                  onClick={nextSlide}
-                  disabled={currentSlide === slides.length - 1}
-                  className={`flex items-center justify-center w-10 h-10 rounded-full shadow-lg transition-colors focus:outline-none ${
-                    currentSlide === slides.length - 1
-                      ? "bg-gray-300 text-gray-600 cursor-not-allowed"
-                      : "bg-yellow-400 text-gray-900 hover:scale-105"
-                  }`}>
-                  <ChevronRight className="w-5 h-5" />
-                </button>
-              </div>
+          {/* League Info Banner */}
+          <div className="bg-white/10 rounded-md p-3 mb-4">
+            <div className="text-white text-sm">
+              <span className="font-semibold">League Structure:</span> 4 teams •
+              Each team plays 3 matches (once against every other team) • 6
+              total matches • Top two teams advance to the final
             </div>
           </div>
 
@@ -183,6 +107,8 @@ const PremierLeagueFixtures = () => {
           <div className="bg-white/5 rounded-md p-3 mb-4 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
             <div className="flex items-center gap-4 flex-wrap">
               <div className="text-sm font-semibold text-white/90">Filters</div>
+
+              {/* Time filters */}
               <div className="flex items-center gap-2">
                 <label className="flex items-center gap-1 text-sm text-white">
                   <input
@@ -208,56 +134,44 @@ const PremierLeagueFixtures = () => {
                 </label>
               </div>
 
+              {/* Round filters */}
               <div className="flex items-center gap-2">
                 <label className="flex items-center gap-1 text-sm text-white">
                   <input
                     type="checkbox"
                     className="w-4 h-4"
-                    checked={selectedVenues.includes("UNILAG")}
+                    checked={selectedRounds.includes(1)}
                     onChange={() =>
-                      toggle(selectedVenues, setSelectedVenues, "UNILAG")
+                      toggle(selectedRounds, setSelectedRounds, 1)
                     }
                   />
-                  <span className="ml-1">UNILAG</span>
+                  <span className="ml-1">Round 1</span>
                 </label>
                 <label className="flex items-center gap-1 text-sm text-white">
                   <input
                     type="checkbox"
                     className="w-4 h-4"
-                    checked={selectedVenues.includes("TBS")}
+                    checked={selectedRounds.includes(2)}
                     onChange={() =>
-                      toggle(selectedVenues, setSelectedVenues, "TBS")
+                      toggle(selectedRounds, setSelectedRounds, 2)
                     }
                   />
-                  <span className="ml-1">TBS</span>
+                  <span className="ml-1">Round 2</span>
+                </label>
+                <label className="flex items-center gap-1 text-sm text-white">
+                  <input
+                    type="checkbox"
+                    className="w-4 h-4"
+                    checked={selectedRounds.includes(3)}
+                    onChange={() =>
+                      toggle(selectedRounds, setSelectedRounds, 3)
+                    }
+                  />
+                  <span className="ml-1">Round 3</span>
                 </label>
               </div>
 
-              <div className="flex items-center gap-2">
-                <label className="flex items-center gap-1 text-sm text-white">
-                  <input
-                    type="checkbox"
-                    className="w-4 h-4"
-                    checked={selectedDays.includes("SAT")}
-                    onChange={() =>
-                      toggle(selectedDays, setSelectedDays, "SAT")
-                    }
-                  />
-                  <span className="ml-1">SAT</span>
-                </label>
-                <label className="flex items-center gap-1 text-sm text-white">
-                  <input
-                    type="checkbox"
-                    className="w-4 h-4"
-                    checked={selectedDays.includes("SUN")}
-                    onChange={() =>
-                      toggle(selectedDays, setSelectedDays, "SUN")
-                    }
-                  />
-                  <span className="ml-1">SUN</span>
-                </label>
-              </div>
-
+              {/* Team filter */}
               <div className="flex items-center gap-2">
                 <label className="text-sm text-white">Team</label>
                 <select
@@ -281,8 +195,7 @@ const PremierLeagueFixtures = () => {
               <button
                 onClick={() => {
                   setSelectedTimes([]);
-                  setSelectedVenues([]);
-                  setSelectedDays([]);
+                  setSelectedRounds([]);
                   setSelectedTeam("");
                 }}
                 className="text-sm px-3 py-1 rounded bg-white/20 text-white">
@@ -291,14 +204,11 @@ const PremierLeagueFixtures = () => {
               <button
                 onClick={() => {
                   setSelectedTimes([]);
-                  setSelectedVenues([]);
-                  setSelectedDays([]);
+                  setSelectedRounds([]);
                   setSelectedTeam("");
                 }}
                 className={`text-sm px-3 py-1 rounded ${
-                  selectedTimes.length === 0 &&
-                  selectedVenues.length === 0 &&
-                  selectedDays.length === 0
+                  !hasFilters
                     ? "bg-yellow-400 text-gray-900"
                     : "bg-white/10 text-white"
                 }`}>
@@ -307,9 +217,9 @@ const PremierLeagueFixtures = () => {
             </div>
           </div>
 
-          {/* Grid of fixtures - denser layout */}
+          {/* Grid of fixtures */}
           <div className="bg-white rounded-md p-4">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
               {displayedFixtures.map((fixture, index) => (
                 <div
                   key={fixture.id || index}
@@ -319,29 +229,26 @@ const PremierLeagueFixtures = () => {
                       match: fixture.match,
                       date: fixture.date,
                       venue: fixture.venue,
-                      division: "Premier League",
+                      division: "Women's League",
                     });
                     router.push(`/results?${params.toString()}`);
                   }}
-                  className={`border rounded-md p-3 transition hover:shadow-md cursor-pointer ${
-                    fixture.venue === "UNILAG"
-                      ? "bg-yellow-50 border-yellow-200 hover:bg-yellow-100"
-                      : fixture.venue === "TBS"
-                      ? "bg-blue-50 border-blue-200 hover:bg-blue-100"
-                      : "bg-white hover:bg-gray-50"
-                  }`}>
+                  className="border rounded-md p-4 transition hover:shadow-md cursor-pointer bg-yellow-100 border-yellow-200 hover:bg-yellow-200">
                   <div className="flex items-center justify-between mb-2">
                     <div className="text-xs font-semibold text-gray-600">
                       {fixture.day}
                     </div>
                     <div className="text-xs text-gray-500">{fixture.date}</div>
                   </div>
-                  <div className="text-sm font-bold text-gray-800 text-center mb-2">
+                  <div className="text-sm flex flex-col font-bold text-gray-800 text-center mb-2">
                     {fixture.match}
+                    <span className="rounded font-semibold text-xs text-pink-700">
+                      Round {fixture.round}
+                    </span>
                   </div>
                   <div className="flex items-center justify-between text-xs text-gray-600">
                     <div className="inline-flex items-center gap-2">
-                      <span className="bg-gray-100 px-2 py-0.5 rounded">
+                      <span className="bg-gray-200 px-2 py-0.5 rounded">
                         {fixture.time}
                       </span>
                     </div>
@@ -354,32 +261,21 @@ const PremierLeagueFixtures = () => {
             </div>
           </div>
 
-          <div className="mt-3 w-full bg-red-500 ">
+          <div className="mt-3 w-full bg-red-500">
             <img
               src="/brand1.png"
               alt="brands"
               className="w-full object-fill opacity-95"
             />
           </div>
-          <div className="mt-4 text-sm text-white/90">
-            Season 2025/2026 • Super 6 Fixtures Begin 14th March 2026
+          <div className="mt-4 text-sm text-white/85">
+            Season 2025/2026 • Women&apos;s League • Top two teams advance to
+            the final
           </div>
-        </div>
-
-        <div className="mt-4 flex items-center justify-center gap-2">
-          {slides.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentSlide(index)}
-              className={`h-2 rounded-full transition-all ${
-                currentSlide === index ? "w-8 bg-yellow-400" : "w-3 bg-gray-300"
-              }`}
-            />
-          ))}
         </div>
       </div>
     </div>
   );
 };
 
-export default PremierLeagueFixtures;
+export default WomensLeagueFixtures;
