@@ -1,7 +1,8 @@
 {
+  "/not-found": "app/not-found.js",
   "/page": "app/page.js",
   "/division-one/page": "app/division-one/page.js",
-  "/weekly-reports/division-one/page": "app/weekly-reports/division-one/page.js",
+  "/super-4-div-one/page": "app/super-4-div-one/page.js",
   "/premier-league/page": "app/premier-league/page.js",
   "/womens-league/page": "app/womens-league/page.js"
 }

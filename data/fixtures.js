@@ -855,6 +855,73 @@ export const womensLeagueFixtures = {
   ],
 };
 
+export const super4DivOneFixtures = {
+  february: [
+    {
+      id: "S4D1-FEB-001",
+      date: "15/02/2026",
+      day: "Sun",
+      time: "10am",
+      venue: "UNILAG",
+      matchNo: 43,
+      match: "GCU vs TBCC",
+      result: null,
+    },
+    {
+      id: "S4D1-FEB-002",
+      date: "15/02/2026",
+      day: "Sun",
+      time: "2pm",
+      venue: "UNILAG",
+      matchNo: 44,
+      match: "LACC vs LCC",
+      result: null,
+    },
+    {
+      id: "S4D1-FEB-003",
+      date: "22/02/2026",
+      day: "Sun",
+      time: "10am",
+      venue: "UNILAG",
+      matchNo: 45,
+      match: "TBCC vs LCC",
+      result: null,
+    },
+    {
+      id: "S4D1-FEB-004",
+      date: "22/02/2026",
+      day: "Sun",
+      time: "2pm",
+      venue: "UNILAG",
+      matchNo: 46,
+      match: "LACC vs GCU",
+      result: null,
+    },
+  ],
+  march: [
+    {
+      id: "S4D1-MAR-001",
+      date: "01/03/2026",
+      day: "Sun",
+      time: "10am",
+      venue: "UNILAG",
+      matchNo: 47,
+      match: "TBCC vs LACC",
+      result: null,
+    },
+    {
+      id: "S4D1-MAR-002",
+      date: "01/03/2026",
+      day: "Sun",
+      time: "2pm",
+      venue: "UNILAG",
+      matchNo: 48,
+      match: "GCU vs LCC",
+      result: null,
+    },
+  ],
+};
+
 // Helper function to get all fixtures as a flat array with division info
 export const getAllFixtures = () => {
   const all = [];
@@ -877,6 +944,13 @@ export const getAllFixtures = () => {
   Object.values(womensLeagueFixtures).forEach((roundFixtures) => {
     roundFixtures.forEach((f) => {
       all.push({ ...f, division: "Women's League" });
+    });
+  });
+
+  // Super 4 [Div-One]
+  Object.values(super4DivOneFixtures).forEach((monthFixtures) => {
+    monthFixtures.forEach((f) => {
+      all.push({ ...f, division: "Super 4 [Div-One]" });
     });
   });
 
