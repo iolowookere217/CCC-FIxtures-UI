@@ -2,40 +2,55 @@
 import React, { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { super4DivOneFixtures } from "../data/fixtures";
+import { fortyOversFixtures } from "../data/fixtures";
 
-const Super4DivOneFixtures = () => {
+const FortyOversFixtures = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const router = useRouter();
 
-  const fixtures = super4DivOneFixtures;
+  const fixtures = fortyOversFixtures;
+
+  const groupStageFixtures = [
+    ...fixtures.groupA,
+    ...fixtures.groupB,
+    ...fixtures.groupC,
+    ...fixtures.groupD,
+  ];
+
+  const knockoutFixtures = [...fixtures.semiFinals, ...fixtures.finals];
 
   const slides = [
     {
-      title: "FEBRUARY 2026",
-      color: "from-red-900 to-red-700",
-      fixtures: fixtures.february,
+      title: "GROUP STAGE",
+      color: "from-indigo-900 to-indigo-700",
+      fixtures: groupStageFixtures,
+      hasGroups: true,
     },
     {
-      title: "MARCH 2026",
-      color: "from-green-900 to-green-700",
-      fixtures: fixtures.march,
+      title: "SEMI FINALS & FINAL",
+      color: "from-violet-900 to-violet-700",
+      fixtures: knockoutFixtures,
+      hasGroups: false,
     },
   ];
 
   const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % slides.length);
-  const prevslide = () =>
+  const prevSlide = () =>
     setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
 
   const currentSlideData = slides[currentSlide];
-  const baseFixtures = currentSlideData.fixtures.filter(
-    (f) => (f.match || "").toUpperCase() !== "RESERVE"
-  );
 
   // filter state
-  const [selectedTimes, setSelectedTimes] = useState([]);
-  const [selectedDays, setSelectedDays] = useState([]);
+  const [selectedGroups, setSelectedGroups] = useState([]);
+  const [selectedVenues, setSelectedVenues] = useState([]);
   const [selectedTeam, setSelectedTeam] = useState("");
+
+  const toggle = (list, setList, value) => {
+    if (list.includes(value)) setList(list.filter((v) => v !== value));
+    else setList([...list, value]);
+  };
+
+  const baseFixtures = currentSlideData.fixtures;
 
   // compute unique teams from current slide fixtures
   const uniqueTeams = Array.from(
@@ -49,19 +64,16 @@ const Super4DivOneFixtures = () => {
     )
   );
 
-  const toggle = (list, setList, value) => {
-    if (list.includes(value)) setList(list.filter((v) => v !== value));
-    else setList([...list, value]);
-  };
-
-  const normTime = (t) => (t || "").toLowerCase().replace(/\s+/g, "");
-
   const displayedFixtures = baseFixtures.filter((f) => {
-    if (selectedTimes.length > 0 && !selectedTimes.includes(normTime(f.time)))
+    if (
+      selectedGroups.length > 0 &&
+      currentSlideData.hasGroups &&
+      !selectedGroups.includes(f.group)
+    )
       return false;
     if (
-      selectedDays.length > 0 &&
-      !selectedDays.some((day) => (f.day || "").toUpperCase() === day)
+      selectedVenues.length > 0 &&
+      !selectedVenues.includes((f.venue || "").toUpperCase())
     )
       return false;
     if (selectedTeam && selectedTeam !== "ALL") {
@@ -76,6 +88,26 @@ const Super4DivOneFixtures = () => {
 
   const totalGames = displayedFixtures.length;
 
+  // Venue counts
+  const unilagCount = baseFixtures.filter(
+    (f) => (f.venue || "").toUpperCase() === "UNILAG"
+  ).length;
+  const tbsCount = baseFixtures.filter(
+    (f) => (f.venue || "").toUpperCase() === "TBS"
+  ).length;
+
+  const groupColors = {
+    A: "bg-green-100 text-green-800 border-green-200",
+    B: "bg-purple-100 text-purple-800 border-purple-200",
+    C: "bg-orange-100 text-orange-800 border-orange-200",
+    D: "bg-rose-100 text-rose-800 border-rose-200",
+  };
+
+  const cardColors = {
+    UNILAG: "bg-yellow-50 border-yellow-200 hover:bg-yellow-100",
+    TBS: "bg-blue-50 border-blue-200 hover:bg-blue-100",
+  };
+
   return (
     <div className="w-full min-h-screen bg-gray-50 p-6">
       <div className="mx-auto w-full max-w-7xl">
@@ -89,7 +121,7 @@ const Super4DivOneFixtures = () => {
                   {currentSlideData.title}
                 </h1>
                 <div className="text-sm text-yellow-200">
-                  • SUPER 4 [DIV-ONE] FIXTURES
+                  • 40 OVERS LEAGUE
                 </div>
               </div>
             </div>
@@ -97,17 +129,24 @@ const Super4DivOneFixtures = () => {
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 w-full sm:w-auto">
               {/* Summary */}
               <div className="flex items-center gap-2 flex-wrap">
-                {selectedTimes.length > 0 ||
-                selectedDays.length > 0 ||
+                {selectedGroups.length > 0 ||
+                selectedVenues.length > 0 ||
                 selectedTeam ? (
                   <div className="px-3 py-1 rounded-md font-semibold text-sm bg-white/20 text-white">
                     Filtered: {totalGames} {totalGames === 1 ? "game" : "games"}
                   </div>
                 ) : (
                   <>
-                    <div className="px-3 py-1 rounded-md font-semibold text-sm bg-yellow-100 text-yellow-800 border border-yellow-200">
-                      UNILAG: {baseFixtures.length}
-                    </div>
+                    {unilagCount > 0 && (
+                      <div className="px-3 py-1 rounded-md font-semibold text-sm bg-yellow-100 text-yellow-800 border border-yellow-200">
+                        UNILAG: {unilagCount}
+                      </div>
+                    )}
+                    {tbsCount > 0 && (
+                      <div className="px-3 py-1 rounded-md font-semibold text-sm bg-blue-100 text-blue-800 border border-blue-200">
+                        TBS: {tbsCount}
+                      </div>
+                    )}
                     <div className="px-3 py-1 rounded-md font-semibold text-sm bg-white/20 text-white">
                       Total: {baseFixtures.length}
                     </div>
@@ -118,7 +157,7 @@ const Super4DivOneFixtures = () => {
               {/* Navigation */}
               <div className="flex items-center gap-2 mt-2 sm:mt-0">
                 <button
-                  onClick={prevslide}
+                  onClick={prevSlide}
                   disabled={currentSlide === 0}
                   className={`flex items-center justify-center w-10 h-10 rounded-full shadow-lg transition-colors focus:outline-none ${
                     currentSlide === 0
@@ -145,42 +184,51 @@ const Super4DivOneFixtures = () => {
           <div className="bg-white/5 rounded-md p-3 mb-4 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
             <div className="flex items-center gap-4 flex-wrap">
               <div className="text-sm font-semibold text-white/90">Filters</div>
-              <div className="flex items-center gap-2">
-                <label className="flex items-center gap-1 text-sm text-white">
-                  <input
-                    type="checkbox"
-                    className="w-4 h-4"
-                    checked={selectedTimes.includes("10am")}
-                    onChange={() =>
-                      toggle(selectedTimes, setSelectedTimes, "10am")
-                    }
-                  />
-                  <span className="ml-1">10am</span>
-                </label>
-                <label className="flex items-center gap-1 text-sm text-white">
-                  <input
-                    type="checkbox"
-                    className="w-4 h-4"
-                    checked={selectedTimes.includes("2pm")}
-                    onChange={() =>
-                      toggle(selectedTimes, setSelectedTimes, "2pm")
-                    }
-                  />
-                  <span className="ml-1">2pm</span>
-                </label>
-              </div>
 
+              {/* Group filters (only for group stage) */}
+              {currentSlideData.hasGroups && (
+                <div className="flex items-center gap-2">
+                  {["A", "B", "C", "D"].map((group) => (
+                    <label
+                      key={group}
+                      className="flex items-center gap-1 text-sm text-white">
+                      <input
+                        type="checkbox"
+                        className="w-4 h-4"
+                        checked={selectedGroups.includes(group)}
+                        onChange={() =>
+                          toggle(selectedGroups, setSelectedGroups, group)
+                        }
+                      />
+                      <span className="ml-1">Grp {group}</span>
+                    </label>
+                  ))}
+                </div>
+              )}
+
+              {/* Venue filters */}
               <div className="flex items-center gap-2">
                 <label className="flex items-center gap-1 text-sm text-white">
                   <input
                     type="checkbox"
                     className="w-4 h-4"
-                    checked={selectedDays.includes("SUN")}
+                    checked={selectedVenues.includes("UNILAG")}
                     onChange={() =>
-                      toggle(selectedDays, setSelectedDays, "SUN")
+                      toggle(selectedVenues, setSelectedVenues, "UNILAG")
                     }
                   />
-                  <span className="ml-1">SUN</span>
+                  <span className="ml-1">UNILAG</span>
+                </label>
+                <label className="flex items-center gap-1 text-sm text-white">
+                  <input
+                    type="checkbox"
+                    className="w-4 h-4"
+                    checked={selectedVenues.includes("TBS")}
+                    onChange={() =>
+                      toggle(selectedVenues, setSelectedVenues, "TBS")
+                    }
+                  />
+                  <span className="ml-1">TBS</span>
                 </label>
               </div>
 
@@ -206,8 +254,8 @@ const Super4DivOneFixtures = () => {
             <div className="flex items-center gap-2">
               <button
                 onClick={() => {
-                  setSelectedTimes([]);
-                  setSelectedDays([]);
+                  setSelectedGroups([]);
+                  setSelectedVenues([]);
                   setSelectedTeam("");
                 }}
                 className="text-sm px-3 py-1 rounded bg-white/20 text-white">
@@ -215,13 +263,13 @@ const Super4DivOneFixtures = () => {
               </button>
               <button
                 onClick={() => {
-                  setSelectedTimes([]);
-                  setSelectedDays([]);
+                  setSelectedGroups([]);
+                  setSelectedVenues([]);
                   setSelectedTeam("");
                 }}
                 className={`text-sm px-3 py-1 rounded ${
-                  selectedTimes.length === 0 &&
-                  selectedDays.length === 0 &&
+                  selectedGroups.length === 0 &&
+                  selectedVenues.length === 0 &&
                   !selectedTeam
                     ? "bg-yellow-400 text-gray-900"
                     : "bg-white/10 text-white"
@@ -234,42 +282,66 @@ const Super4DivOneFixtures = () => {
           {/* Grid of fixtures */}
           <div className="bg-white rounded-md p-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-              {displayedFixtures.map((fixture, index) => (
-                <div
-                  key={fixture.id || index}
-                  onClick={() => {
-                    const params = new URLSearchParams({
-                      id: fixture.id,
-                      match: fixture.match,
-                      date: fixture.date,
-                      venue: fixture.venue,
-                      division: "Super 4 [Div-One]",
-                    });
-                    router.push(`/results?${params.toString()}`);
-                  }}
-                  className="border rounded-md p-3 transition hover:shadow-md cursor-pointer bg-yellow-50 border-yellow-200 hover:bg-yellow-100">
-                  <div className="flex items-center justify-between mb-2">
-                    <div className="text-xs font-semibold text-gray-600">
-                      {fixture.day}
-                    </div>
-                    <div className="text-xs text-gray-500">{fixture.date}</div>
-                  </div>
-                  <div className="text-sm font-bold text-gray-800 text-center mb-2">
-                    {fixture.match}
-                  </div>
+              {displayedFixtures.map((fixture, index) => {
+                const venueKey = (fixture.venue || "").toUpperCase();
+                const cardColor =
+                  cardColors[venueKey] ||
+                  "bg-white border-gray-200 hover:bg-gray-50";
 
-                  <div className="flex items-center justify-between text-xs text-gray-600">
-                    <div className="inline-flex items-center gap-2">
-                      <span className="bg-gray-100 px-2 py-0.5 rounded">
-                        {fixture.time}
-                      </span>
+                return (
+                  <div
+                    key={fixture.id || index}
+                    onClick={() => {
+                      const params = new URLSearchParams({
+                        id: fixture.id,
+                        match: fixture.match,
+                        date: fixture.date,
+                        venue: fixture.venue,
+                        division: "40 Overs League",
+                      });
+                      router.push(`/results?${params.toString()}`);
+                    }}
+                    className={`border rounded-md p-3 transition hover:shadow-md cursor-pointer ${cardColor}`}>
+                    <div className="flex items-center justify-between mb-2">
+                      <div className="text-xs font-semibold text-gray-600">
+                        {fixture.day}
+                      </div>
+                      <div className="text-xs text-gray-500">
+                        {fixture.date}
+                      </div>
                     </div>
-                    <div className="text-right">
-                      📍 <span className="font-medium">{fixture.venue}</span>
+                    <div className="text-sm flex flex-col font-bold text-gray-800 text-center mb-2">
+                      {fixture.match}
+                      {fixture.group && (
+                        <span
+                          className={`text-xs font-semibold mt-1 inline-block mx-auto px-2 py-0.5 rounded border ${
+                            groupColors[fixture.group] ||
+                            "bg-gray-100 text-gray-700"
+                          }`}>
+                          Group {fixture.group}
+                        </span>
+                      )}
+                      {fixture.stage && (
+                        <span className="text-xs font-semibold text-violet-700 mt-1">
+                          {fixture.stage}
+                        </span>
+                      )}
+                    </div>
+
+                    <div className="flex items-center justify-between text-xs text-gray-600">
+                      <div className="inline-flex items-center gap-2">
+                        <span className="bg-gray-100 px-2 py-0.5 rounded">
+                          {fixture.time}
+                        </span>
+                      </div>
+                      <div className="text-right">
+                        📍{" "}
+                        <span className="font-medium">{fixture.venue}</span>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
 
@@ -281,7 +353,7 @@ const Super4DivOneFixtures = () => {
             />
           </div>
           <div className="mt-4 text-sm text-yellow-200 font-semibold">
-            Top Two teams qualify to Premier League 2026/2027 Season
+            Club Cricket Committee — 40 Overs League 2025/2026
           </div>
         </div>
 
@@ -301,4 +373,4 @@ const Super4DivOneFixtures = () => {
   );
 };
 
-export default Super4DivOneFixtures;
+export default FortyOversFixtures;

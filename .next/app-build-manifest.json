@@ -11,25 +11,30 @@
       "static/css/app/layout.css",
       "static/chunks/app/layout.js"
     ],
-    "/division-one/page": [
+    "/super-six/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/division-one/page.js"
+      "static/chunks/app/super-six/page.js"
     ],
     "/super-4-div-one/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/super-4-div-one/page.js"
     ],
-    "/premier-league/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/premier-league/page.js"
-    ],
     "/womens-league/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/womens-league/page.js"
+    ],
+    "/forty-overs/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/forty-overs/page.js"
+    ],
+    "/premier-league/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/premier-league/page.js"
     ]
   }
 }

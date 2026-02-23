@@ -2,29 +2,34 @@
 import React, { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { super4DivOneFixtures } from "../data/fixtures";
+import { superSixFixtures } from "../data/fixtures";
 
-const Super4DivOneFixtures = () => {
+const SuperSixFixtures = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const router = useRouter();
 
-  const fixtures = super4DivOneFixtures;
+  const fixtures = superSixFixtures;
 
   const slides = [
     {
       title: "FEBRUARY 2026",
-      color: "from-red-900 to-red-700",
+      color: "from-emerald-900 to-emerald-700",
       fixtures: fixtures.february,
     },
     {
       title: "MARCH 2026",
-      color: "from-green-900 to-green-700",
+      color: "from-teal-900 to-teal-700",
       fixtures: fixtures.march,
+    },
+    {
+      title: "APRIL 2026",
+      color: "from-cyan-900 to-cyan-700",
+      fixtures: fixtures.april,
     },
   ];
 
   const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % slides.length);
-  const prevslide = () =>
+  const prevSlide = () =>
     setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
 
   const currentSlideData = slides[currentSlide];
@@ -76,6 +81,11 @@ const Super4DivOneFixtures = () => {
 
   const totalGames = displayedFixtures.length;
 
+  // Get unique days for filter
+  const availableDays = Array.from(
+    new Set(baseFixtures.map((f) => (f.day || "").toUpperCase()))
+  );
+
   return (
     <div className="w-full min-h-screen bg-gray-50 p-6">
       <div className="mx-auto w-full max-w-7xl">
@@ -89,7 +99,7 @@ const Super4DivOneFixtures = () => {
                   {currentSlideData.title}
                 </h1>
                 <div className="text-sm text-yellow-200">
-                  • SUPER 4 [DIV-ONE] FIXTURES
+                  • SUPER 6 PREMIER LEAGUE FIXTURES
                 </div>
               </div>
             </div>
@@ -105,8 +115,8 @@ const Super4DivOneFixtures = () => {
                   </div>
                 ) : (
                   <>
-                    <div className="px-3 py-1 rounded-md font-semibold text-sm bg-yellow-100 text-yellow-800 border border-yellow-200">
-                      UNILAG: {baseFixtures.length}
+                    <div className="px-3 py-1 rounded-md font-semibold text-sm bg-blue-100 text-blue-800 border border-blue-200">
+                      TBS: {baseFixtures.length}
                     </div>
                     <div className="px-3 py-1 rounded-md font-semibold text-sm bg-white/20 text-white">
                       Total: {baseFixtures.length}
@@ -118,7 +128,7 @@ const Super4DivOneFixtures = () => {
               {/* Navigation */}
               <div className="flex items-center gap-2 mt-2 sm:mt-0">
                 <button
-                  onClick={prevslide}
+                  onClick={prevSlide}
                   disabled={currentSlide === 0}
                   className={`flex items-center justify-center w-10 h-10 rounded-full shadow-lg transition-colors focus:outline-none ${
                     currentSlide === 0
@@ -171,17 +181,19 @@ const Super4DivOneFixtures = () => {
               </div>
 
               <div className="flex items-center gap-2">
-                <label className="flex items-center gap-1 text-sm text-white">
-                  <input
-                    type="checkbox"
-                    className="w-4 h-4"
-                    checked={selectedDays.includes("SUN")}
-                    onChange={() =>
-                      toggle(selectedDays, setSelectedDays, "SUN")
-                    }
-                  />
-                  <span className="ml-1">SUN</span>
-                </label>
+                {availableDays.map((day) => (
+                  <label key={day} className="flex items-center gap-1 text-sm text-white">
+                    <input
+                      type="checkbox"
+                      className="w-4 h-4"
+                      checked={selectedDays.includes(day)}
+                      onChange={() =>
+                        toggle(selectedDays, setSelectedDays, day)
+                      }
+                    />
+                    <span className="ml-1">{day}</span>
+                  </label>
+                ))}
               </div>
 
               <div className="flex items-center gap-2">
@@ -243,11 +255,11 @@ const Super4DivOneFixtures = () => {
                       match: fixture.match,
                       date: fixture.date,
                       venue: fixture.venue,
-                      division: "Super 4 [Div-One]",
+                      division: "Super Six",
                     });
                     router.push(`/results?${params.toString()}`);
                   }}
-                  className="border rounded-md p-3 transition hover:shadow-md cursor-pointer bg-yellow-50 border-yellow-200 hover:bg-yellow-100">
+                  className="border rounded-md p-3 transition hover:shadow-md cursor-pointer bg-blue-50 border-blue-200 hover:bg-blue-100">
                   <div className="flex items-center justify-between mb-2">
                     <div className="text-xs font-semibold text-gray-600">
                       {fixture.day}
@@ -281,7 +293,7 @@ const Super4DivOneFixtures = () => {
             />
           </div>
           <div className="mt-4 text-sm text-yellow-200 font-semibold">
-            Top Two teams qualify to Premier League 2026/2027 Season
+            CCC 2025/2026 Season — Super 6 Premier League
           </div>
         </div>
 
@@ -301,4 +313,4 @@ const Super4DivOneFixtures = () => {
   );
 };
 
-export default Super4DivOneFixtures;
+export default SuperSixFixtures;

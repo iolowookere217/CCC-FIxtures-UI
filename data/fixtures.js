@@ -916,6 +916,330 @@ export const super4DivOneFixtures = {
   ],
 };
 
+export const superSixFixtures = {
+  february: [
+    {
+      id: "S6-FEB-001",
+      date: "28/02/2026",
+      day: "Sat",
+      time: "10am",
+      venue: "TBS",
+      match: "GCI vs FGCW",
+      matchNo: 37,
+      result: null,
+    },
+    {
+      id: "S6-FEB-002",
+      date: "28/02/2026",
+      day: "Sat",
+      time: "2pm",
+      venue: "TBS",
+      match: "ILCC 1 vs FCC",
+      matchNo: 38,
+      result: null,
+    },
+  ],
+  march: [
+    {
+      id: "S6-MAR-001",
+      date: "01/03/2026",
+      day: "Sun",
+      time: "10am",
+      venue: "TBS",
+      match: "ITCC vs FGCW",
+      matchNo: 39,
+      result: null,
+    },
+    {
+      id: "S6-MAR-002",
+      date: "01/03/2026",
+      day: "Sun",
+      time: "2pm",
+      venue: "TBS",
+      match: "FCC vs RSCC",
+      matchNo: 40,
+      result: null,
+    },
+    {
+      id: "S6-MAR-003",
+      date: "07/03/2026",
+      day: "Sat",
+      time: "10am",
+      venue: "TBS",
+      match: "GCI vs ILCC",
+      matchNo: 41,
+      result: null,
+    },
+    {
+      id: "S6-MAR-004",
+      date: "07/03/2026",
+      day: "Sat",
+      time: "2pm",
+      venue: "TBS",
+      match: "FCC vs FGCW",
+      matchNo: 42,
+      result: null,
+    },
+    {
+      id: "S6-MAR-005",
+      date: "08/03/2026",
+      day: "Sun",
+      time: "10am",
+      venue: "TBS",
+      match: "ILCC 1 vs RSCC",
+      matchNo: 43,
+      result: null,
+    },
+    {
+      id: "S6-MAR-006",
+      date: "08/03/2026",
+      day: "Sun",
+      time: "2pm",
+      venue: "TBS",
+      match: "GCI vs ITCC",
+      matchNo: 44,
+      result: null,
+    },
+    {
+      id: "S6-MAR-007",
+      date: "15/03/2026",
+      day: "Sun",
+      time: "10am",
+      venue: "TBS",
+      match: "RSCC vs FGCW",
+      matchNo: 45,
+      result: null,
+    },
+    {
+      id: "S6-MAR-008",
+      date: "15/03/2026",
+      day: "Sun",
+      time: "2pm",
+      venue: "TBS",
+      match: "ITCC vs ILCC",
+      matchNo: 46,
+      result: null,
+    },
+  ],
+  april: [
+    {
+      id: "S6-APR-001",
+      date: "05/04/2026",
+      day: "Sun",
+      time: "10am",
+      venue: "TBS",
+      match: "ITCC vs RSCC",
+      matchNo: 47,
+      result: null,
+    },
+    {
+      id: "S6-APR-002",
+      date: "18/04/2026",
+      day: "Sat",
+      time: "10am",
+      venue: "TBS",
+      match: "GCI vs FCC",
+      matchNo: 48,
+      result: null,
+    },
+    {
+      id: "S6-APR-003",
+      date: "18/04/2026",
+      day: "Sat",
+      time: "2pm",
+      venue: "TBS",
+      match: "ILCC vs FGCW",
+      matchNo: 49,
+      result: null,
+    },
+    {
+      id: "S6-APR-004",
+      date: "19/04/2026",
+      day: "Sun",
+      time: "10am",
+      venue: "TBS",
+      match: "GCI vs RSCC",
+      matchNo: 50,
+      result: null,
+    },
+    {
+      id: "S6-APR-005",
+      date: "19/04/2026",
+      day: "Sun",
+      time: "2pm",
+      venue: "TBS",
+      match: "ITCC vs FCC",
+      matchNo: 51,
+      result: null,
+    },
+  ],
+};
+
+export const fortyOversFixtures = {
+  groupA: [
+    {
+      id: "40O-GA-001",
+      date: "28/02/2026",
+      day: "Sat",
+      time: "10am",
+      venue: "UNILAG",
+      match: "HPCC vs TCC",
+      group: "A",
+      result: null,
+    },
+    {
+      id: "40O-GA-002",
+      date: "21/03/2026",
+      day: "Sat",
+      time: "10am",
+      venue: "UNILAG",
+      match: "ILCC 1 vs HPCC",
+      group: "A",
+      result: null,
+    },
+    {
+      id: "40O-GA-003",
+      date: "04/04/2026",
+      day: "Sat",
+      time: "10am",
+      venue: "TBS",
+      match: "ILCC 1 vs TCC",
+      group: "A",
+      result: null,
+    },
+  ],
+  groupB: [
+    {
+      id: "40O-GB-001",
+      date: "15/03/2026",
+      day: "Sun",
+      time: "10am",
+      venue: "UNILAG",
+      match: "LRCC vs ILCC 2",
+      group: "B",
+      result: null,
+    },
+    {
+      id: "40O-GB-002",
+      date: "22/03/2026",
+      day: "Sun",
+      time: "10am",
+      venue: "UNILAG",
+      match: "ITCC vs LRCC",
+      group: "B",
+      result: null,
+    },
+    {
+      id: "40O-GB-003",
+      date: "29/03/2026",
+      day: "Sun",
+      time: "10am",
+      venue: "UNILAG",
+      match: "ITCC vs ILCC 2",
+      group: "B",
+      result: null,
+    },
+  ],
+  groupC: [
+    {
+      id: "40O-GC-001",
+      date: "07/03/2026",
+      day: "Sat",
+      time: "10am",
+      venue: "UNILAG",
+      match: "SECC vs SGCC",
+      group: "C",
+      result: null,
+    },
+    {
+      id: "40O-GC-002",
+      date: "08/03/2026",
+      day: "Sun",
+      time: "10am",
+      venue: "UNILAG",
+      match: "SECC vs LCC",
+      group: "C",
+      result: null,
+    },
+    {
+      id: "40O-GC-003",
+      date: "14/03/2026",
+      day: "Sat",
+      time: "10am",
+      venue: "TBS",
+      match: "LCC vs SGCC",
+      group: "C",
+      result: null,
+    },
+  ],
+  groupD: [
+    {
+      id: "40O-GD-001",
+      date: "14/03/2026",
+      day: "Sat",
+      time: "10am",
+      venue: "UNILAG",
+      match: "RCC vs TBCC",
+      group: "D",
+      result: null,
+    },
+    {
+      id: "40O-GD-002",
+      date: "28/03/2026",
+      day: "Sat",
+      time: "10am",
+      venue: "UNILAG",
+      match: "TBCC vs LCCC",
+      group: "D",
+      result: null,
+    },
+    {
+      id: "40O-GD-003",
+      date: "04/04/2026",
+      day: "Sat",
+      time: "10am",
+      venue: "UNILAG",
+      match: "RCC vs LCCC",
+      group: "D",
+      result: null,
+    },
+  ],
+  semiFinals: [
+    {
+      id: "40O-SF-001",
+      date: "25/04/2026",
+      day: "Sat",
+      time: "10am",
+      venue: "UNILAG",
+      match: "Winner Group A vs Winner Group D",
+      stage: "Semi Final 1",
+      result: null,
+    },
+    {
+      id: "40O-SF-002",
+      date: "25/04/2026",
+      day: "Sat",
+      time: "10am",
+      venue: "TBS",
+      match: "Winner Group B vs Winner Group C",
+      stage: "Semi Final 2",
+      result: null,
+    },
+  ],
+  finals: [
+    {
+      id: "40O-FIN-001",
+      date: "26/04/2026",
+      day: "Sun",
+      time: "10am",
+      venue: "TBS",
+      match: "Winner SF1 vs Winner SF2",
+      stage: "Final",
+      result: null,
+    },
+  ],
+};
+
 // Helper function to get all fixtures as a flat array with division info
 export const getAllFixtures = () => {
   const all = [];
@@ -945,6 +1269,20 @@ export const getAllFixtures = () => {
   Object.values(super4DivOneFixtures).forEach((monthFixtures) => {
     monthFixtures.forEach((f) => {
       all.push({ ...f, division: "Super 4 [Div-One]" });
+    });
+  });
+
+  // Super Six
+  Object.values(superSixFixtures).forEach((monthFixtures) => {
+    monthFixtures.forEach((f) => {
+      all.push({ ...f, division: "Super Six" });
+    });
+  });
+
+  // 40 Overs League
+  Object.values(fortyOversFixtures).forEach((groupFixtures) => {
+    groupFixtures.forEach((f) => {
+      all.push({ ...f, division: "40 Overs League" });
     });
   });
 

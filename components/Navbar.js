@@ -14,9 +14,11 @@ export default function Navbar() {
   const links = [
     { name: "Home", href: "/" },
     { name: "Division One", href: "/division-one" },
-    { name: "Super 4 [Div-One]", href: "/super-4-div-one" },
+    { name: "Super 4", href: "/super-4-div-one" },
     { name: "Premier League", href: "/premier-league" },
+    { name: "Super Six", href: "/super-six" },
     { name: "Women's League", href: "/womens-league" },
+    { name: "40 Overs", href: "/forty-overs" },
   ];
 
   const reportLinks = [
