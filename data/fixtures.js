@@ -790,7 +790,7 @@ export const womensLeagueFixtures = {
   round1: [
     {
       id: "WL-R1-001",
-      date: "07/02/2026",
+      date: "28/02/2026",
       day: "Sat",
       time: "10am",
       venue: "UNILAG",
@@ -800,7 +800,7 @@ export const womensLeagueFixtures = {
     },
     {
       id: "WL-R1-002",
-      date: "07/02/2026",
+      date: "28/02/2026",
       day: "Sat",
       time: "2pm",
       venue: "UNILAG",
@@ -812,7 +812,7 @@ export const womensLeagueFixtures = {
   round2: [
     {
       id: "WL-R2-001",
-      date: "14/02/2026",
+      date: "07/03/2026",
       day: "Sat",
       time: "10am",
       venue: "UNILAG",
@@ -822,7 +822,7 @@ export const womensLeagueFixtures = {
     },
     {
       id: "WL-R2-002",
-      date: "14/02/2026",
+      date: "07/03/2026",
       day: "Sat",
       time: "2pm",
       venue: "UNILAG",
@@ -834,7 +834,7 @@ export const womensLeagueFixtures = {
   round3: [
     {
       id: "WL-R3-001",
-      date: "21/02/2026",
+      date: "15/03/2026",
       day: "Sat",
       time: "10am",
       venue: "UNILAG",
@@ -844,7 +844,7 @@ export const womensLeagueFixtures = {
     },
     {
       id: "WL-R3-002",
-      date: "21/02/2026",
+      date: "15/03/2026",
       day: "Sat",
       time: "2pm",
       venue: "UNILAG",
