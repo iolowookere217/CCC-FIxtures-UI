@@ -1143,7 +1143,7 @@ export const fortyOversFixtures = {
   groupC: [
     {
       id: "40O-GC-001",
-      date: "07/03/2026",
+      date: "28/03/2026",
       day: "Sat",
       time: "10am",
       venue: "UNILAG",
@@ -1185,7 +1185,7 @@ export const fortyOversFixtures = {
     },
     {
       id: "40O-GD-002",
-      date: "28/03/2026",
+      date: "07/03/2026",
       day: "Sat",
       time: "10am",
       venue: "UNILAG",
