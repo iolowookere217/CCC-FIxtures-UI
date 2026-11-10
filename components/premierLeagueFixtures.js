@@ -21,19 +21,24 @@ const PremierLeagueFixtures = () => {
 
   const slides = [
     {
-      title: "DECEMBER 2025",
+      title: "DECEMBER 2026",
       color: "from-blue-900 to-blue-700",
       fixtures: fixtures.december,
     },
     {
-      title: "JANUARY 2026",
+      title: "JANUARY 2027",
       color: "from-purple-900 to-purple-700",
       fixtures: fixtures.january,
     },
     {
-      title: "FEBRUARY 2026",
+      title: "FEBRUARY 2027",
       color: "from-red-900 to-red-700",
       fixtures: fixtures.february,
+    },
+    {
+      title: "MARCH 2027",
+      color: "from-green-900 to-green-700",
+      fixtures: fixtures.march,
     },
   ];
 
@@ -362,7 +367,7 @@ const PremierLeagueFixtures = () => {
             />
           </div>
           <div className="mt-4 text-sm text-white/90">
-            Season 2025/2026 • Super 6 Fixtures Begin 14th March 2026
+            Season 2026/2027 • Super 6 Fixtures Begin 21st March 2027 (provisional)
           </div>
         </div>
 

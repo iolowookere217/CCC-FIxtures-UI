@@ -12,17 +12,12 @@ const SuperSixFixtures = () => {
 
   const slides = [
     {
-      title: "FEBRUARY 2026",
-      color: "from-emerald-900 to-emerald-700",
-      fixtures: fixtures.february,
-    },
-    {
-      title: "MARCH 2026",
+      title: "MARCH 2027",
       color: "from-teal-900 to-teal-700",
       fixtures: fixtures.march,
     },
     {
-      title: "APRIL 2026",
+      title: "APRIL 2027",
       color: "from-cyan-900 to-cyan-700",
       fixtures: fixtures.april,
     },
@@ -115,9 +110,23 @@ const SuperSixFixtures = () => {
                   </div>
                 ) : (
                   <>
-                    <div className="px-3 py-1 rounded-md font-semibold text-sm bg-blue-100 text-blue-800 border border-blue-200">
-                      TBS: {baseFixtures.length}
-                    </div>
+                    {Object.entries(
+                      baseFixtures.reduce((acc, f) => {
+                        const v = (f.venue || "").toUpperCase();
+                        acc[v] = (acc[v] || 0) + 1;
+                        return acc;
+                      }, {})
+                    ).map(([venue, count]) => (
+                      <div
+                        key={venue}
+                        className={`px-3 py-1 rounded-md font-semibold text-sm border ${
+                          venue === "UNILAG"
+                            ? "bg-yellow-100 text-yellow-800 border-yellow-200"
+                            : "bg-blue-100 text-blue-800 border-blue-200"
+                        }`}>
+                        {venue}: {count}
+                      </div>
+                    ))}
                     <div className="px-3 py-1 rounded-md font-semibold text-sm bg-white/20 text-white">
                       Total: {baseFixtures.length}
                     </div>
@@ -266,8 +275,13 @@ const SuperSixFixtures = () => {
                     </div>
                     <div className="text-xs text-gray-500">{fixture.date}</div>
                   </div>
-                  <div className="text-sm font-bold text-gray-800 text-center mb-2">
+                  <div className="text-sm flex flex-col font-bold text-gray-800 text-center mb-2">
                     {fixture.match}
+                    {fixture.round && (
+                      <span className="font-semibold text-xs text-teal-700">
+                        Round {fixture.round}
+                      </span>
+                    )}
                   </div>
 
                   <div className="flex items-center justify-between text-xs text-gray-600">
@@ -293,7 +307,8 @@ const SuperSixFixtures = () => {
             />
           </div>
           <div className="mt-4 text-sm text-yellow-200 font-semibold">
-            CCC 2025/2026 Season — Super 6 Premier League
+            CCC 2026/2027 Season — Super 6 Premier League • Positions refer to
+            the final Stage 1 table • Dates provisional
           </div>
         </div>
 

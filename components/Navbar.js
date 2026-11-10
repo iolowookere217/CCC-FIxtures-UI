@@ -14,7 +14,7 @@ export default function Navbar() {
   const links = [
     { name: "Home", href: "/" },
     { name: "Division One", href: "/division-one" },
-    { name: "Super 4", href: "/super-4-div-one" },
+    { name: "D1 Playoffs", href: "/super-4-div-one" },
     { name: "Premier League", href: "/premier-league" },
     { name: "Super Six", href: "/super-six" },
     { name: "Women's League", href: "/womens-league" },
