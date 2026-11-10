@@ -19,7 +19,7 @@ const Homepage = () => {
       image:
         "https://images.unsplash.com/photo-1531415074968-036ba1b575da?w=1200&h=600&fit=crop",
       title: "Club Cricket Committee Lagos League",
-      subtitle: "2025/2026 Season - Powered by Sterling Bank",
+      subtitle: "2026/2027 Season - Powered by Sterling Bank",
     },
     {
       image:
@@ -31,7 +31,7 @@ const Homepage = () => {
       image:
         "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=1200&h=600&fit=crop",
       title: "Join the Championship",
-      subtitle: "9 Premier Teams | 14 Division One Teams",
+      subtitle: "9 Premier Teams | 15 Division One Teams",
     },
   ];
 
@@ -54,8 +54,8 @@ const Homepage = () => {
 
   const stats = [
     { icon: Users, label: "Registered Players", value: "500+" },
-    { icon: Trophy, label: "Active Teams", value: "22" },
-    { icon: Calendar, label: "Matches Per Season", value: "99+" },
+    { icon: Trophy, label: "Active Teams", value: "24" },
+    { icon: Calendar, label: "Matches Per Season", value: "115+" },
     { icon: MapPin, label: "Venues", value: "3" },
   ];
 
@@ -160,7 +160,7 @@ const Homepage = () => {
             The Club Cricket Committee (CCC), founded in 1987, is one of
             Nigeria’s most influential cricket bodies. Starting with four clubs,
             it has grown into a major cricket ecosystem with two divisions: 9
-            teams in the Premier League and 14 in Division One for the 2025/26
+            teams in the Premier League and 15 in Division One for the 2026/27
             season. Over its 38-year history, the CCC has developed talent
             across Nigeria, attracting players from multiple states and
             neighboring countries. Originally a 50-over league, it now operates
@@ -176,12 +176,12 @@ const Homepage = () => {
         <div className="grid md:grid-cols-2 gap-8 items-center">
           <div className="bg-gradient-to-br from-blue-600 to-blue-800 rounded-2xl p-8 text-white">
             <h3 className="text-2xl font-bold mb-4">
-              2025/2026 Season Highlights
+              2026/2027 Season Highlights
             </h3>
             <ul className="space-y-3">
               <li className="flex items-start gap-3">
                 <div className="w-2 h-2 bg-yellow-400 rounded-full mt-2"></div>
-                <span>Season runs from November 2025 to March 2026</span>
+                <span>Season runs from November 2026 to April 2027</span>
               </li>
               <li className="flex items-start gap-3">
                 <div className="w-2 h-2 bg-yellow-400 rounded-full mt-2"></div>
@@ -189,23 +189,23 @@ const Homepage = () => {
               </li>
               <li className="flex items-start gap-3">
                 <div className="w-2 h-2 bg-yellow-400 rounded-full mt-2"></div>
-                <span>14 Division One teams split into Group A & B</span>
+                <span>15 Division One teams split into Groups A, B & C</span>
               </li>
               <li className="flex items-start gap-3">
                 <div className="w-2 h-2 bg-yellow-400 rounded-full mt-2"></div>
-                <span>99 T20 matches scheduled across 5 months</span>
+                <span>115 T20 matches scheduled across 6 months</span>
               </li>
               <li className="flex items-start gap-3">
                 <div className="w-2 h-2 bg-yellow-400 rounded-full mt-2"></div>
                 <span>
-                  Premier League Super 6 Fixtures begin March 14, 2026
+                  Premier League Super 6 Fixtures begin March 21, 2027 (provisional)
                 </span>
               </li>
               <li className="flex items-start gap-3">
                 <div className="w-2 h-2 bg-yellow-400 rounded-full mt-2"></div>
                 <span>
                   {" "}
-                  Division one Super 4 Fixtures begin February 14, 2026
+                  Division One Playoffs begin February 21, 2027 (TBC)
                 </span>
               </li>
             </ul>
@@ -277,7 +277,7 @@ const Homepage = () => {
           <h2 className="text-3xl font-bold mb-4">Proudly Sponsored By</h2>
           <div className="text-5xl font-bold mb-4">STERLING BANK</div>
           <p className="text-xl max-w-2xl mx-auto">
-            Our official sponsor for the 2025/2026 CCC Lagos League season,
+            Our official sponsor for the 2026/2027 CCC Lagos League season,
             committed to developing youth and strengthening Nigerian cricket.
           </p>
         </div>
@@ -364,7 +364,7 @@ const Homepage = () => {
           </div>
           <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
             <p>
-              &copy; 2025 Club Cricket Committee Lagos. All rights reserved.
+              &copy; 2026 Club Cricket Committee Lagos. All rights reserved.
             </p>
           </div>
         </div>

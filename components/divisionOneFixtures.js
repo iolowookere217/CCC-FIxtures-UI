@@ -21,22 +21,22 @@ const DivisionOneFixtures = () => {
 
   const slides = [
     {
-      title: "NOVEMBER 2025",
+      title: "NOVEMBER 2026",
       color: "from-cyan-800 to-cyan-600",
       fixtures: fixtures.november,
     },
     {
-      title: "DECEMBER 2025",
+      title: "DECEMBER 2026",
       color: "from-blue-900 to-blue-700",
       fixtures: fixtures.december,
     },
     {
-      title: "JANUARY 2026",
+      title: "JANUARY 2027",
       color: "from-purple-900 to-purple-700",
       fixtures: fixtures.january,
     },
     {
-      title: "FEBRUARY 2026",
+      title: "FEBRUARY 2027",
       color: "from-red-900 to-red-700",
       fixtures: fixtures.february,
     },
@@ -92,9 +92,13 @@ const DivisionOneFixtures = () => {
     )
       return false;
 
+    // group is "A" | "B" | "C" for in-group games, or "A/B" etc. for cross-group games
     if (
       selectedGroups.length > 0 &&
-      !selectedGroups.includes((f.group || "").toUpperCase())
+      !(f.group || "")
+        .toUpperCase()
+        .split("/")
+        .some((g) => selectedGroups.includes(g))
     )
       return false;
 
@@ -289,6 +293,17 @@ const DivisionOneFixtures = () => {
                   />
                   <span className="ml-1">Group B</span>
                 </label>
+                <label className="flex items-center gap-1 text-sm text-white">
+                  <input
+                    type="checkbox"
+                    className="w-4 h-4"
+                    checked={selectedGroups.includes("C")}
+                    onChange={() =>
+                      toggle(selectedGroups, setSelectedGroups, "C")
+                    }
+                  />
+                  <span className="ml-1">Group C</span>
+                </label>
               </div>
               <div className="flex items-center gap-2">
                 <label className="text-sm text-white">Team</label>
@@ -377,11 +392,17 @@ const DivisionOneFixtures = () => {
                     {fixture.group && (
                       <span
                         className={`rounded font-semibold text-xs ${
-                          fixture.group.toUpperCase() === "A"
+                          fixture.group.includes("/")
+                            ? " text-gray-600"
+                            : fixture.group.toUpperCase() === "A"
                             ? " text-green-700"
-                            : " text-purple-700"
+                            : fixture.group.toUpperCase() === "B"
+                            ? " text-purple-700"
+                            : " text-orange-700"
                         }`}>
-                        Group {fixture.group}
+                        {fixture.group.includes("/")
+                          ? `Cross ${fixture.group}`
+                          : `Group ${fixture.group}`}
                       </span>
                     )}
                   </div>
@@ -409,7 +430,7 @@ const DivisionOneFixtures = () => {
             />
           </div>
           <div className="mt-4 text-sm text-white/85">
-            Season 2025/2026 • Super 4 to begin 14th February 2026
+            Season 2026/2027 • 15 teams in 3 groups • Top 4 playoffs from 21st February 2027 (TBC)
           </div>
         </div>
 

@@ -12,12 +12,12 @@ const Super4DivOneFixtures = () => {
 
   const slides = [
     {
-      title: "FEBRUARY 2026",
+      title: "FEBRUARY 2027",
       color: "from-red-900 to-red-700",
       fixtures: fixtures.february,
     },
     {
-      title: "MARCH 2026",
+      title: "MARCH 2027",
       color: "from-green-900 to-green-700",
       fixtures: fixtures.march,
     },
@@ -89,7 +89,7 @@ const Super4DivOneFixtures = () => {
                   {currentSlideData.title}
                 </h1>
                 <div className="text-sm text-yellow-200">
-                  • SUPER 4 [DIV-ONE] FIXTURES
+                  • DIVISION ONE PLAYOFFS
                 </div>
               </div>
             </div>
@@ -243,7 +243,7 @@ const Super4DivOneFixtures = () => {
                       match: fixture.match,
                       date: fixture.date,
                       venue: fixture.venue,
-                      division: "Super 4 [Div-One]",
+                      division: "Division One Playoffs",
                     });
                     router.push(`/results?${params.toString()}`);
                   }}
@@ -254,7 +254,12 @@ const Super4DivOneFixtures = () => {
                     </div>
                     <div className="text-xs text-gray-500">{fixture.date}</div>
                   </div>
-                  <div className="text-sm font-bold text-gray-800 text-center mb-2">
+                  <div className="text-sm flex flex-col font-bold text-gray-800 text-center mb-2">
+                    {fixture.stage && (
+                      <span className="font-semibold text-xs text-red-700 uppercase">
+                        {fixture.stage}
+                      </span>
+                    )}
                     {fixture.match}
                   </div>
 
@@ -281,7 +286,8 @@ const Super4DivOneFixtures = () => {
             />
           </div>
           <div className="mt-4 text-sm text-yellow-200 font-semibold">
-            Top Two teams qualify to Premier League 2026/2027 Season
+            Division One Playoffs 2026/2027 • Top 4 from the league table •
+            Dates tentative (TBC)
           </div>
         </div>
 
