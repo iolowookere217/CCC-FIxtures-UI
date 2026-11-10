@@ -379,16 +379,6 @@ export const divisionOneFixtures = {
       result: null,
     },
     {
-      id: "D1-NOV-005",
-      date: "15/11/2026",
-      day: "Sun",
-      time: "2pm",
-      venue: "CMS",
-      match: "Thunderbolt vs Kings Titans 11",
-      group: "C",
-      result: null,
-    },
-    {
       id: "D1-NOV-006",
       date: "15/11/2026",
       day: "Sun",
